@@ -156,3 +156,44 @@ header {
     
     display: inline-block;
 }
+
+/* ====== FORM ======= */
+
+input, select, option:hover {
+    font-size: 18px;
+    font-weight: bold;
+
+    width: 100%;
+
+    outline: none;
+
+    padding: 4px 8px;
+}
+
+input[type="radio"] {
+    width: initial;
+    margin-right: 4px;
+}
+
+select:focus {
+    background-color: var(--primary-color);
+
+    outline: solid;
+}
+
+form .item span {
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    color: white;
+    background-color: var(--primary-color);
+
+    padding: 8px 32px;
+    margin-top: 32px;
+
+    width: 100%;
+    
+    font-size: 18px;
+
+}
