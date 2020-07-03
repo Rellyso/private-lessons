@@ -1,0 +1,24 @@
+{
+    "teachers": [
+        {
+            "id": 1,
+            "avatar_url": "https://translate.google.com",
+            "name": "Renata",
+            "birth": 1322784000000,
+            "grade": "medio",
+            "class_type": "distancia",
+            "lessons": "matemática",
+            "created_at": 1593787725310
+        },
+        {
+            "id": 2,
+            "avatar_url": "https://www.google.com",
+            "name": "Lucas",
+            "birth": 886291200000,
+            "grade": "medio",
+            "class_type": "presencial",
+            "lessons": "ingles",
+            "created_at": 1593788011063
+        }
+    ]
+}
