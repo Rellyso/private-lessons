@@ -1,5 +1,6 @@
 const fs = require('fs')
 const data = require('./data')
+const { age, graduation } = require('./utils')
 
 // create
 exports.post = function (req, res) {
@@ -38,6 +39,28 @@ exports.post = function (req, res) {
     } )
 
     // return res.send(data)
+}
+
+exports.show = function (req, res) {
+    const { id } = req.params
+
+    const foundTeacher = data.teachers.find( function (teacher) {
+        return teacher.id == id
+    })
+
+    if (!foundTeacher) {
+        return res.send('Teacher not found!')
+    }
+
+    teacher = {
+        ...foundTeacher,
+        grade: graduation(foundTeacher.grade),
+        age: age(foundTeacher.birth),
+        lessons: foundTeacher.lessons.split(','),
+        created_at: new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric'}).format(foundTeacher.created_at)
+    }
+
+    return res.render('teachers/show.njk', { teacher })
 }
 // update
 

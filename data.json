@@ -2,11 +2,11 @@
     "teachers": [
         {
             "id": 1,
-            "avatar_url": "https://translate.google.com",
+            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
             "name": "Renata",
             "birth": 1322784000000,
             "grade": "medio",
-            "class_type": "distancia",
+            "class_type": "À distancia",
             "lessons": "matemática",
             "created_at": 1593787725310
         },
@@ -16,9 +16,49 @@
             "name": "Lucas",
             "birth": 886291200000,
             "grade": "medio",
-            "class_type": "presencial",
+            "class_type": "Presencial",
             "lessons": "ingles",
             "created_at": 1593788011063
+        },
+        {
+            "id": 3,
+            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
+            "name": "Luana",
+            "birth": 962755200000,
+            "grade": "superior",
+            "class_type": "Presencial",
+            "lessons": "matemática, tecnologia, empreendedorismo",
+            "created_at": 1594081461268
+        },
+        {
+            "id": 4,
+            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
+            "name": "Ruan",
+            "birth": 899769600000,
+            "grade": "doutorado",
+            "class_type": "Presencial",
+            "lessons": "matemática, tecnologia da informação, english",
+            "created_at": 1594081729466
+        },
+        {
+            "id": 5,
+            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
+            "name": "Marcos",
+            "birth": 994464000000,
+            "grade": "superior",
+            "class_type": "Presencial",
+            "lessons": "matemática",
+            "created_at": 1594081795315
+        },
+        {
+            "id": 6,
+            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
+            "name": "Luna",
+            "birth": 899856000000,
+            "grade": "medio",
+            "class_type": "Presencial",
+            "lessons": "ingles",
+            "created_at": 1594081842019
         }
     ]
 }
