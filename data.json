@@ -6,17 +6,17 @@
             "name": "Renata",
             "birth": 1322784000000,
             "grade": "medio",
-            "class_type": "À distancia",
+            "class_type": "distancia",
             "lessons": "matemática",
             "created_at": 1593787725310
         },
         {
             "id": 2,
-            "avatar_url": "https://www.google.com",
+            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
             "name": "Lucas",
             "birth": 886291200000,
             "grade": "medio",
-            "class_type": "Presencial",
+            "class_type": "presencial",
             "lessons": "ingles",
             "created_at": 1593788011063
         },
@@ -26,7 +26,7 @@
             "name": "Luana",
             "birth": 962755200000,
             "grade": "superior",
-            "class_type": "Presencial",
+            "class_type": "presencial",
             "lessons": "matemática, tecnologia, empreendedorismo",
             "created_at": 1594081461268
         },
@@ -36,7 +36,7 @@
             "name": "Ruan",
             "birth": 899769600000,
             "grade": "doutorado",
-            "class_type": "Presencial",
+            "class_type": "presencial",
             "lessons": "matemática, tecnologia da informação, english",
             "created_at": 1594081729466
         },
@@ -46,7 +46,7 @@
             "name": "Marcos",
             "birth": 994464000000,
             "grade": "superior",
-            "class_type": "Presencial",
+            "class_type": "presencial",
             "lessons": "matemática",
             "created_at": 1594081795315
         },
@@ -56,7 +56,7 @@
             "name": "Luna",
             "birth": 899856000000,
             "grade": "medio",
-            "class_type": "Presencial",
+            "class_type": "presencial",
             "lessons": "ingles",
             "created_at": 1594081842019
         }
