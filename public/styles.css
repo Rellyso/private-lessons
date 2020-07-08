@@ -177,6 +177,10 @@ input[type="radio"] {
     margin-right: 4px;
 }
 
+input[type="date"] {
+    font-family: 'Roboto', sans-serif;
+}
+
 select:focus {
     background-color: var(--primary-color);
 
@@ -197,8 +201,23 @@ button[type="submit"], .button {
     width: 100%;
     
     font-size: 18px;
+    
 }
 
+button[type="submit"] {
+    width: 60%;
+}
+
+form {
+    display: inline;
+}
+
+#form-delete button{
+    background-color: crimson;
+
+    max-width: 36%;
+
+}
 .button {
     display: block;
 
