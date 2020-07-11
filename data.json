@@ -2,17 +2,17 @@
     "teachers": [
         {
             "id": "1",
-            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
-            "name": "Renataa",
+            "avatar_url": "https://images.unsplash.com/photo-1511629091441-ee46146481b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            "name": "Renato",
             "birth": 1322784000000,
             "grade": "medio",
-            "class_type": "distancia",
+            "class_type": "presencial",
             "lessons": "matemática",
             "created_at": 1593787725310
         },
         {
-            "id": 3,
-            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
+            "id": "3",
+            "avatar_url": "https://images.unsplash.com/photo-1525571453712-090270b8354f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
             "name": "Luana",
             "birth": 962755200000,
             "grade": "superior",
@@ -21,18 +21,18 @@
             "created_at": 1594081461268
         },
         {
-            "id": 4,
-            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
-            "name": "Ruan",
+            "id": "4",
+            "avatar_url": "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            "name": "Ana",
             "birth": 899769600000,
             "grade": "doutorado",
-            "class_type": "presencial",
+            "class_type": "distancia",
             "lessons": "matemática, tecnologia da informação, english",
             "created_at": 1594081729466
         },
         {
-            "id": 5,
-            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
+            "id": "5",
+            "avatar_url": "https://images.unsplash.com/photo-1513258496099-48168024aec0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
             "name": "Marcos",
             "birth": 994464000000,
             "grade": "superior",
@@ -41,8 +41,8 @@
             "created_at": 1594081795315
         },
         {
-            "id": 6,
-            "avatar_url": "https://source.unsplash.com/collection/9976614/500x500",
+            "id": "6",
+            "avatar_url": "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
             "name": "Luna",
             "birth": 899856000000,
             "grade": "medio",

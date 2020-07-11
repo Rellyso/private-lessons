@@ -2,6 +2,22 @@ const fs = require('fs')
 const data = require('./data')
 const { age, graduation, class_type, date } = require('./utils')
 
+// index
+exports.index = function (req, res) {
+    let teachers = [...data.teachers]
+
+    for (let i=0; i < teachers.length; i++) {
+        const lessons = teachers[i].lessons
+        teachers[i] = {
+            ...teachers[i],
+            lessons: lessons.split(', ')
+        }
+
+    }
+
+    return res.render('teachers/index', { teachers })
+}
+
 // create
 exports.post = function (req, res) {
 
