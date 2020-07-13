@@ -205,18 +205,23 @@ button[type="submit"], .button {
 }
 
 button[type="submit"] {
-    width: 60%;
+    width: 100%;
 }
 
 form {
     display: inline;
 }
 
+/* ===== FORM EDIT-PAGE ====== */
+
+.form-edit button[type="submit"] {
+    width: 60%;
+}
+
 #form-delete button{
     background-color: crimson;
 
-    max-width: 36%;
-
+    width: 36%;
 }
 .button {
     display: block;
@@ -225,11 +230,16 @@ form {
     text-decoration: none;
 }
 
-/* TABLE INDEX */
+/* ===== TABLE INDEX ====== */
 
 .table-container {
     display: block;
-    padding: 40px;
+    padding: 32px;
+}
+
+.table-container > a {
+    display: inline-block;
+    margin-bottom: 12px;
 }
 
 table {
@@ -241,10 +251,12 @@ table {
 
     font-size: 14px;
     
-    color: var(--primary-color);
+    color: #777;
 }
 
 td, th {
+    text-align: center;
+
     padding: 16px;
 
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -280,7 +292,8 @@ td, th {
     text-align: center;
 }
 
-table td a {
+table td a,
+.table-container > a {
     padding: 8px 16px;
 
     text-decoration: none;
