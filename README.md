@@ -1,6 +1,6 @@
 
 
-**<h1> PRIVATE LESSONS </h1>**
+**<h1 align="center"> PRIVATE LESSONS </h1>**
 
 <p align="center">
 <img alt="GitHub" src="https://img.shields.io/github/license/Rellyso/private-lessons?color=1e8bc3&style=flat-square">
