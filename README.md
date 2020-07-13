@@ -2,9 +2,9 @@
 
 **<h1> PRIVATE LESSONS </h1>**
 
-<center>
-<img alt="GitHub" src="https://img.shields.io/github/license/Rellyso/gym-manager?color=7159c1">
-</center>
+<p align="center">
+<img alt="GitHub" src="https://img.shields.io/github/license/Rellyso/private-lessons?color=1e8bc3&style=flat-square">
+</p>
 
 <br>
 
