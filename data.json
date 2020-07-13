@@ -1,13 +1,42 @@
 {
+    "students": [
+        {
+            "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+            "name": "Pietro",
+            "email": "pie.tro@students.com",
+            "birth": 980985600000,
+            "school_grade": "2EM",
+            "workload": "25",
+            "id": "2"
+        },
+        {
+            "id": "3",
+            "avatar_url": "https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+            "name": "Robert",
+            "email": "robert@student.com",
+            "birth": 954374400000,
+            "school_grade": "2EM",
+            "workload": "25"
+        },
+        {
+            "id": 4,
+            "avatar_url": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+            "name": "Luana",
+            "email": "lu@student.com",
+            "birth": 1107302400000,
+            "school_grade": "7EF",
+            "workload": "20"
+        }
+    ],
     "teachers": [
         {
             "id": "1",
             "avatar_url": "https://images.unsplash.com/photo-1511629091441-ee46146481b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
             "name": "Renato",
-            "birth": 1322784000000,
-            "grade": "medio",
+            "birth": 1291248000000,
+            "grade": "superior",
             "class_type": "presencial",
-            "lessons": "matemática",
+            "lessons": "Matemática",
             "created_at": 1593787725310
         },
         {
@@ -23,32 +52,22 @@
         {
             "id": "4",
             "avatar_url": "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-            "name": "Ana",
-            "birth": 899769600000,
-            "grade": "doutorado",
-            "class_type": "distancia",
-            "lessons": "matemática, tecnologia da informação, english",
+            "name": "Ana Clara",
+            "birth": 710467200000,
+            "grade": "mestrado",
+            "class_type": "presencial",
+            "lessons": "matemática, english",
             "created_at": 1594081729466
         },
         {
-            "id": "5",
-            "avatar_url": "https://images.unsplash.com/photo-1513258496099-48168024aec0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-            "name": "Marcos",
-            "birth": 994464000000,
+            "id": 4,
+            "avatar_url": "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+            "name": "Maria",
+            "birth": 634953600000,
             "grade": "superior",
             "class_type": "presencial",
-            "lessons": "matemática",
-            "created_at": 1594081795315
-        },
-        {
-            "id": "6",
-            "avatar_url": "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-            "name": "Luna",
-            "birth": 899856000000,
-            "grade": "medio",
-            "class_type": "presencial",
-            "lessons": "ingles",
-            "created_at": 1594081842019
+            "lessons": "Inglês, matemática, TI",
+            "created_at": 1594649186804
         }
     ]
 }
