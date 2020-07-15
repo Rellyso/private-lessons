@@ -103,6 +103,7 @@ exports.edit = function (req, res) {
     res.render('teachers/edit.njk', { teacher })
 }
 
+
 // put 
 exports.put = function (req, res) {
     const { id } = req.body
