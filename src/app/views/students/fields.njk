@@ -33,48 +33,48 @@
                 <div>Data de Nascimento:</div>
                 <input 
                 type="date" 
-                name="birth"
+                name="birth_date"
                 required
-                value="{{ student.birth }}"
+                value="{{ student.birth_date }}"
                 >
             </div>
 
             <div class="item">
                 <div>Ano escolar:</div>
-                <select name="school_grade">
-                    <option value="5EF" selected disabled>
+                <select name="school_level">
+                    <option value="" selected disabled>
                         clique para escolher
                     </option>
 
-                    <option value="5EF" {% if student.school_grade == "5EF" %} selected {% endif %}>
+                    <option value="5EF" {% if student.school_level == "5EF" %} selected {% endif %}>
                         5º ano - Fundamental
                     </option>
 
-                    <option value="6EF" {% if student.school_grade == "6EF" %} selected {% endif %}>
+                    <option value="6EF" {% if student.school_level == "6EF" %} selected {% endif %}>
                         6º ano - Fundamental
                     </option>
 
-                    <option value="7EF" {% if student.school_grade == "7EF" %} selected {% endif %}>
+                    <option value="7EF" {% if student.school_level == "7EF" %} selected {% endif %}>
                         7º ano - Fundamental
                     </option>
 
-                    <option value="8EF" {% if student.school_grade == "8EF" %} selected {% endif %}>
+                    <option value="8EF" {% if student.school_level == "8EF" %} selected {% endif %}>
                         8º ano - Fundamental
                     </option>
 
-                    <option value="9EF" {% if student.school_grade == "9EF" %} selected {% endif %}>
+                    <option value="9EF" {% if student.school_level == "9EF" %} selected {% endif %}>
                         9º ano - Fundamental
                     </option>
 
-                    <option value="1EM" {% if student.school_grade == "1EM" %} selected {% endif %}>
+                    <option value="1EM" {% if student.school_level == "1EM" %} selected {% endif %}>
                         1º ano - Ensino médio
                     </option>
 
-                    <option value="2EM" {% if student.school_grade == "2EM" %} selected {% endif %}>
+                    <option value="2EM" {% if student.school_level == "2EM" %} selected {% endif %}>
                         2º ano - Ensino médio
                     </option>
 
-                    <option value="3EM" {% if student.school_grade == "3EM" %} selected {% endif %}>
+                    <option value="3EM" {% if student.school_level == "3EM" %} selected {% endif %}>
                         3º ano - Ensino médio
                     </option>
 
@@ -88,6 +88,21 @@
                 name="workload"
                 placeholder="5... horas por semana"
                 value="{{ student.workload }}">
+            </div>
+
+            <div class="item">
+                <div>Professor:</div>
+                <select name="teacher_id">
+                    <option value="" selected disabled invalid>
+                        clique para escolher
+                    </option>
+                    {% for teacher in teacherOptions %}
+                    <option value="{{ teacher.id }}" {% if student.teacher_id == teacher.id %} selected {% endif %}>
+                        {{ teacher.name }}
+                    </option>
+                    {% endfor %}
+
+                </select>
             </div>
             
             <button type="submit">Salvar</button>

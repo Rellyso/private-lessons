@@ -26,17 +26,22 @@
 
             <div class="item">
                 <div>Aniversário</div> 
-                <div>{{ student.birth }}</div>
+                <div>{{ student.birth_date }}</div>
             </div>
 
             <div class="item">
                 <div>Ano Escolar</div> 
-                <div>{{ student.school_grade }}</div>
+                <div>{{ student.school_level }}</div>
             </div>
 
             <div class="item">
                 <div>Carga Horária (por semana)</div> 
                 <div>{{ student.workload }} horas</div>
+            </div>
+
+            <div class="item">
+                <div>Aluno de</div> 
+                <div>{{ teacherOptions.name }}</div>
             </div>
 
             <a href="/students/{{ student.id }}/edit" class="button">Editar</a>
