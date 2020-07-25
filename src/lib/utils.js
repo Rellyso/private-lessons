@@ -52,7 +52,7 @@ module.exports = {
 
         return grade
     },
-    class_type(type) {
+    classType(type) {
         let formatedType = ''
         type == 'distancia' ? formatedType = 'À Distância' : formatedType = 'Presencial'
 
@@ -70,7 +70,8 @@ module.exports = {
             month,
             day,
             iso: `${year}-${month}-${day}`,
-            birthDay: `${day}/${month}`
+            birthDay: `${day}/${month}`,
+            format: `${day}/${month}/${year}`
         }
     }
 
