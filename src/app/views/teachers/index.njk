@@ -7,13 +7,28 @@
 {% block content %}
     <div class="card table-container">
 
-        <a href="/teachers/create">Criar</a>
+        <div class="header">
+            <a class="button" href="/teachers/create">Criar</a>
+
+            <form action="/teachers" method="get">
+                <input 
+                type="text" 
+                name="filter"
+                placeholder="Nome ou Área de atuação"
+                value= "{{ filter }}"
+                >
+
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+
 
         <table width="100%">
             <thead>
                 <tr>
                     <th>nome completo</th>
                     <th>acompanhamento</th>
+                    <th>Alunos</th>
                     <th>ação</th>
                 </tr>
             </thead>
@@ -26,13 +41,17 @@
                             {{ teacher.name }}
                         </td>
 
-                            <td>
-                        {% for lesson in teacher.lessons %}
+                        <td>
+                        {% for subject in teacher.subjects_taught %}
                                <div class="item">
-                                   <span>{{ lesson }}</span>
+                                   <span>{{ subject }}</span>
                                </div> 
                         {% endfor %}
-                            </td>
+                        </td>
+                        
+                        <td>
+                            {{ teacher.total_students }}
+                        </td>
 
                         <td>
                             <a class="button_see" href="/teachers/{{ teacher.id }}">ver</a>

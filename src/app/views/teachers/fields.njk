@@ -24,19 +24,19 @@
                 <div>Data de Nascimento:</div>
                 <input 
                 type="date" 
-                name="birth"
+                name="birth_date"
                 required
-                value="{{ teacher.birth }}"
+                value="{{ teacher.birth_date }}"
                 >
             </div>
 
             <div class="item">
                 <div>Grau de escolaridade:</div>
-                <select name="grade" required>
+                <select name="education_level" required>
                     <option 
                     value="" 
                     disabled
-                    {% if teacher.grade == '' %}
+                    {% if teacher.education_level == '' %}
                     selected
                     {% endif %}
                     >Escolha uma opção
@@ -44,7 +44,7 @@
 
                     <option 
                     value="medio"
-                    {% if teacher.grade == 'medio' %}
+                    {% if teacher.education_level == 'medio' %}
                     selected
                     {% endif %}
                     >Ensino Médio Completo
@@ -52,7 +52,7 @@
 
                     <option 
                     value="superior"
-                    {% if teacher.grade == 'superior' %}
+                    {% if teacher.education_level == 'superior' %}
                     selected
                     {% endif %}
                     >Ensino Superior Completo
@@ -60,7 +60,7 @@
 
                     <option 
                     value="mestrado"
-                    {% if teacher.grade == 'mestrado' %}
+                    {% if teacher.education_level == 'mestrado' %}
                     selected
                     {% endif %}
                     >Mestrado
@@ -68,7 +68,7 @@
 
                     <option 
                     value="doutorado"
-                    {% if teacher.grade == 'doutorado' %}
+                    {% if teacher.education_level == 'doutorado' %}
                     selected
                     {% endif %}
                     >Doutorado</option>
@@ -109,9 +109,9 @@
                 <div>
                     <input 
                     type="text"
-                    name="lessons"
+                    name="subjects_taught"
                     placeholder="matérias divididas por vírgula"
-                    value="{{ teacher.lessons }}"
+                    value="{{ teacher.subjects_taught }}"
                     >
                 </div>
             </div>
