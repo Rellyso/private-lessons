@@ -50,7 +50,9 @@
                         </td>
                         
                         <td>
-                            {{ teacher.total_students }}
+                            <span>
+                                {{ teacher.total_students }}
+                            </span>
                         </td>
 
                         <td>
@@ -60,6 +62,13 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <div class="pagination"
+            data-page="{{pagination.page}}"
+            data-total="{{pagination.total}}"
+            data-filter="{{filter}}"
+        >
+        </div>
 
     </section>
 </div>
