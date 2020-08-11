@@ -5,30 +5,55 @@ const { age, graduation, classType, date } = require('../../lib/utils')
 module.exports = {
     index(req, res) {
 
-        const { filter } = req.query
+        let { filter, page, limit } = req.query
 
-        if (filter) {
-            Teacher.findBy(filter, function (teachers) {
+        limit = limit || 2
+        page = page || 1
+
+        const offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(teachers) {
                 for (let i = 0; i < teachers.length; i++) {
                     teachers[i] = {
                         ...teachers[i],
-                        subjects_taught: teachers[i].subjects_taught.split(',')
+                        subjects_taught: teachers[i].subjects_taught.split(','),
                     }
                 }
 
-                return res.render('teachers/index', { teachers, filter })
-            })
-        } else {
-            Teacher.all(function (teachers) {
-                for (let i = 0; i < teachers.length; i++) {
-                    teachers[i] = {
-                        ...teachers[i],
-                        subjects_taught: teachers[i].subjects_taught.split(',')
-                    }
+                console.log(teachers[0])
+
+                const pagination = {
+                    total: Math.ceil(teachers[0].total / limit),
+                    page
                 }
-                return res.render('teachers/index', { teachers })
-            })
+
+                return res.render('teachers/index', { teachers, filter, pagination })
+            }
         }
+
+        Teacher.paginate(params)
+    //     if (filter) {
+    //         Teacher.findBy(filter, function (teachers) {
+                
+
+    //             return res.render('teachers/index', { teachers, filter })
+    //         })
+    //     } else {
+    //         Teacher.all(function (teachers) {
+    //             for (let i = 0; i < teachers.length; i++) {
+    //                 teachers[i] = {
+    //                     ...teachers[i],
+    //                     subjects_taught: teachers[i].subjects_taught.split(',')
+    //                 }
+    //             }
+    //             return res.render('teachers/index', { teachers })
+    //         })
+    //     }
 
     },
     create(req, res) {
