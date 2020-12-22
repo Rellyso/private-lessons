@@ -25,8 +25,6 @@ module.exports = {
                     }
                 }
 
-                console.log(teachers[0])
-
                 const pagination = {
                     total: Math.ceil(teachers[0].total / limit),
                     page

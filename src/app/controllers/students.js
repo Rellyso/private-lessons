@@ -21,8 +21,6 @@ module.exports = {
                     student.school_level = graduation(student.school_level)
                 }
 
-                console.log(students[0])
-
                 const pagination = {
                     total: Math.ceil(students[0].total / limit),
                     page
