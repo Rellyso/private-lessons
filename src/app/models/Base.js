@@ -1,21 +1,51 @@
 const db = require('../../config/db')
 
-function find(filters, table) {
+function find(filters, table, order) {
     let query = `SELECT * FROM ${table}`
 
     if (filters) {
         Object.keys(filters).map(key => {
-            query += `${key}` // where
+            query += ` ${key}` // where
 
             // where: {key}
             Object.keys(filters[key]).map(field => {
                 // id = key[1].id
-                query += `${field} = ${filters[key][field]}`
+                query += ` ${field} = ${filters[key][field]}`
             })
         })
     }
 
+    if (order) {
+        query += ` GROUP BY ${table} ORDER BY ${table}.${order.by} ${order.type}`
+    }
+
     return db.query(query)
+}
+
+function paginate(table, filter, limit, offset) {
+    let query = '',
+            filterQuery = '',
+            totalQuery = `(SELECT count(*) FROM ${table}) AS total`
+
+        if (filter) {
+            filterQuery = `WHERE ${table}.name ILIKE '%${filter}%'
+            OR ${table}.email ILIKE '%${filter}%'`
+
+            totalQuery = `(
+                SELECT count(*) FROM ${table}
+                ${filterQuery}
+                ) AS total
+            `
+        }
+
+        query = `
+            SELECT ${table}.*, ${totalQuery}, count(${table}) AS total_${table}
+            FROM ${table}
+            ${filterQuery}
+            GROUP BY ${table}.id LIMIT $1 OFFSET $2
+        `
+
+        return db.query(query, [limit, offset])
 }
 
 const Base = {
@@ -31,14 +61,14 @@ const Base = {
         return results.rows[0]
 
     },
-    findOne(filters) {
+    async findOne(filters) {
         const results = await find(filters, this.table)
 
         return results.rows[0]
 
     },
-    async findAll() {
-        const results = await find(filters, this.table)
+    async findAll(order = { by: 'id', type: 'DESC'  } ) {
+        const results = await find(filters, this.table, order)
 
         return results.rows
 
@@ -87,6 +117,11 @@ const Base = {
     delete(id) {
         return db.query(`DELETE FROM ${this.table} WHERE id = $1`, [id])
     },
+    async paginate({ filter, limit, offset}) {
+        const results = await paginate(this.table, filter, limit, offset)
+
+        return results.rows
+    }
 }
 
 module.exports = Base
