@@ -1,0 +1,46 @@
+.messages {
+    position: fixed;
+
+    height: 80px;
+    width: 100vw;
+    left: 0;
+    top: 0;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    animation: message 4s .2s forwards ease;
+    opacity: 0;
+}
+
+.messages.success {
+    background-color: rgb(35, 136, 35);
+}
+
+.messages.error {
+    background-color: rgb(245, 65, 65);
+}
+
+.messages h1 {
+    margin-bottom: 10px;
+}
+
+@keyframes message {
+    0% {
+        opacity: 0;
+        top: -80px;
+    } 15% {
+        opacity: 1;
+        top: 0;
+    } 80% {
+        opacity: 1;
+        top: 0;
+    } 100% {
+        opacity: 0;
+        top: -80px;
+    }
+}
