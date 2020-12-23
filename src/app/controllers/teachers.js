@@ -3,7 +3,7 @@ const { age, graduation, classType, date } = require('../../lib/utils')
 
 
 module.exports = {
-    index(req, res) {
+    async index(req, res) {
 
         let { filter, page, limit } = req.query
 
@@ -12,108 +12,140 @@ module.exports = {
 
         const offset = limit * (page - 1)
 
-        const params = {
+        const teachers = await Teacher.paginate({
             filter,
             page,
             limit,
-            offset,
-            callback(teachers) {
-                for (let i = 0; i < teachers.length; i++) {
-                    teachers[i] = {
-                        ...teachers[i],
-                        subjects_taught: teachers[i].subjects_taught.split(','),
-                    }
-                }
+            offset
+        })
 
-                const pagination = {
-                    total: Math.ceil(teachers[0].total / limit),
-                    page
-                }
+        teachers.map(teacher => {
+            teacher.subjects_taught = teacher.subjects_taught.split(',')
+        })
 
-                return res.render('teachers/index', { teachers, filter, pagination })
-            }
+        const pagination = {
+            total: Math.ceil(teachers[0].total / limit),
+            page
         }
 
-        Teacher.paginate(params)
-    //     if (filter) {
-    //         Teacher.findBy(filter, function (teachers) {
-                
-
-    //             return res.render('teachers/index', { teachers, filter })
-    //         })
-    //     } else {
-    //         Teacher.all(function (teachers) {
-    //             for (let i = 0; i < teachers.length; i++) {
-    //                 teachers[i] = {
-    //                     ...teachers[i],
-    //                     subjects_taught: teachers[i].subjects_taught.split(',')
-    //                 }
-    //             }
-    //             return res.render('teachers/index', { teachers })
-    //         })
-    //     }
+        return res.render('teachers/index', { teachers, filter, pagination })
 
     },
     create(req, res) {
         return res.render('teachers/create')
     },
-    post(req, res) {
+    async post(req, res) {
         const keys = Object.keys(req.body)
-
 
         for (let key of keys) {
             if (req.body[key] == "")
-                return res.send('Please fill in all fields.')
-
+                return res.render('teacher/create', {
+                    teacher: req.body,
+                    error: 'Preencha todos os campos'
+                })
         }
 
-        Teacher.create(req.body, function (teacher) {
-            return res.redirect(`/teachers/${teacher}`)
+        const {
+            name,
+            birth_date,
+            education_level,
+            class_type,
+            subjects_taught
+        } = req.body
+
+        const teacherId = await Teacher.create({
+            name,
+            birth_date,
+            education_level,
+            class_type,
+            subjects_taught
         })
 
+        return res.redirect(`/teachers/${teacherId}`)
     },
-    show(req, res) {
+    async show(req, res) {
         const { id } = req.params
 
-        Teacher.find(id, function (teacher) {
-            if (!teacher) return res.send('Teacher not found!')
+        let teacher = await Teacher.find(id)
 
-            teacher.age = age(teacher.birth_date)
-            teacher.lessons = teacher.subjects_taught.split(',')
-            teacher.created_at = date(teacher.created_at).format
-            teacher.class_type = classType(teacher.class_type)
-            teacher.education_level = graduation(teacher.education_level)
+        console.log(teacher)
 
-            return res.render('teachers/show', { teacher: teacher })
+        if (!teacher) return res.render('teachers/show', {
+            error: 'Teacher não encontrado'
         })
+
+        teacher.age = age(teacher.birth_date)
+        teacher.lessons = teacher.subjects_taught.split(',')
+        teacher.created_at = date(teacher.created_at).format
+        teacher.class_type = classType(teacher.class_type)
+        teacher.education_level = graduation(teacher.education_level)
+
+        return res.render('teachers/show', { teacher })
+
     },
-    edit(req, res) {
+    async edit(req, res) {
         const { id } = req.params
-        Teacher.find(id, function (teacher) {
 
-            teacher.birth_date = date(teacher.birth_date).iso
+        let teacher = await Teacher.find(id)
 
-            res.render('teachers/edit', { teacher })
-        })
+        teacher.birth_date = date(teacher.birth_date).iso
+
+        res.render('teachers/edit', { teacher })
     },
-    put(req, res) {
-        const keys = Object.keys(req.body)
+    async put(req, res) {
+        try {
+            const keys = Object.keys(req.body)
 
+            for (let key of keys) {
+                if (req.body[key] == "")
+                    return res.render('teacher/create', {
+                        teacher: req.body,
+                        error: 'Preencha todos os campos'
+                    })
+            }
 
-        for (let key of keys) {
-            if (req.body[key] == "")
-                return res.send('Please fill in all fields.')
+            const {
+                name,
+                birth_date,
+                education_level,
+                class_type,
+                subjects_taught,
+                id
+            } = req.body
 
+            await Teacher.update(id, {
+                name,
+                birth_date,
+                education_level,
+                class_type,
+                subjects_taught,
+            })
+
+            return res.render(`teachers/edit`, {
+                teacher: req.body,
+                success: 'Professor atualizado!'
+            })
+        } catch (error) {
+            console.error(error)
+            return res.render('teachers/edit', {
+                teacher: req.body,
+                error: 'Não foi possível completar seu pedido, recarregue a página e tente novamente.'
+            })
         }
-
-        Teacher.update(req.body, function () {
-            return res.redirect(`/teachers/${req.body.id}`)
-        })
     },
-    delete(req, res) {
-        Teacher.delete(req.body.id, function () {
+    async delete(req, res) {
+        try {
+            await Teacher.delete(req.body.id)
+
             return res.redirect('/')
-        })
+        } catch (error) {
+            console.error(error)
+
+            return res.render('students/edit', {
+                error: 'Não foi possível completar seu pedido, recarregue a página e tente novamente.'
+            })
+        }
+
     }
 
 }

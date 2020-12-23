@@ -1,112 +1,179 @@
 const Student = require('../models/Student')
-const { age, graduation, date } = require('../../lib/utils')
+const { graduation, date } = require('../../lib/utils')
 
 
 module.exports = {
-    index(req, res) {
-        let { filter, page, limit } = req.query
+    async index(req, res) {
+        try {
+            let { filter, page, limit } = req.query
 
-        limit = limit || 2
-        page = page || 1
+            limit = limit || 3
+            page = page || 1
 
-        const offset = limit * (page - 1)
+            const offset = limit * (page - 1)
 
-        const params = {
-            filter,
-            page,
-            limit,
-            offset,
-            callback(students) {
-                for (let student of students) {
-                    student.school_level = graduation(student.school_level)
-                }
-
-                const pagination = {
-                    total: Math.ceil(students[0].total / limit),
-                    page
-                }
-
-                return res.render('students/index', { students, filter, pagination })
-            }
-        }
-
-        Student.paginate(params)
-    },
-    create(req, res) {
-        Student.selectTeacherOptions(function (options) {
-
-            return res.render('students/create', { teacherOptions: options })
-        })
-    },
-    post(req, res) {
-        const keys = Object.keys(req.body)
-
-
-        for (let key of keys) {
-            if (req.body[key] == "")
-                return res.send('Please fill in all fields.')
-
-        }
-
-        Student.create(req.body, function (student) {
-            return res.redirect(`/students/${student}`)
-        })
-
-    },
-    show(req, res) {
-        const { id } = req.params
-
-        Student.find(id, function (student) {
-            if (!student) return res.send('Student not found!')
-
-            student.birth_date = date(student.birth_date).birthDay
-            student.school_level = graduation(student.school_level)
-
-            Student.selectTeacherOptions(function (options) {
-                let teacherOptions = {}
-
-                for (let option of options) {
-                    if (option.id == student.teacher_id) {
-                        teacherOptions = {
-                            ...option
-                        }
-                    }
-                }
-
-                return res.render('students/show', { teacherOptions, student })
+            const students = await Student.paginate({
+                filter,
+                page,
+                limit,
+                offset
             })
-        })
+
+            students.map(student => {
+                student.school_level = graduation(student.school_level)
+            })
+
+            const pagination = {
+                total: Math.ceil(students[0].total / limit),
+                page
+            }
+
+            return res.render('students/index', { students, filter, pagination })
+
+        } catch (error) {
+            console.error(error)
+            return res.render('students/index', {
+                error: 'Error ao carregar, entre em contato conosco'
+            })
+        }
     },
-    edit(req, res) {
+    async create(req, res) {
+        const teacherOptions = await Student.selectTeacherOptions()
+
+        return res.render('students/create', { teacherOptions })
+    },
+    async post(req, res) {
+        try {
+            const {
+                name,
+                email,
+                avatar_url,
+                birth_date,
+                school_level,
+                workload,
+                teacher_id
+            } = req.body
+
+            const keys = Object.keys(req.body)
+
+            for (let key of keys) {
+                if (req.body[key] == "")
+                    return res.render('students/create', {
+                        student: req.body,
+                        teacherOptions: await Student.selectTeacherOptions(),
+                        error: 'Preencha todos os campos'
+                    })
+
+            }
+
+            const studentId = await Student.create({
+                name,
+                email,
+                avatar_url,
+                birth_date,
+                school_level,
+                workload,
+                teacher_id
+            })
+
+            return res.redirect(`/students/${studentId}`)
+
+        } catch (error) {
+            console.error(error)
+
+            return res.render('students/create', {
+                error: 'Não foi possível completar seu pedido, recarregue a página e tente novamente.'
+            })
+        }
+    },
+    async show(req, res) {
         const { id } = req.params
-        Student.find(id, function (student) {
+
+        const student = await Student.findWithTeacher(id)
+
+        if (!student) return res.send('Student not found!') // adicionar mensagem no frontEnd
+
+        student.birth_date = date(student.birth_date).birthDay
+        student.school_level = graduation(student.school_level)
+
+        return res.render('students/show', { student })
+    },
+    async edit(req, res) {
+        try {
+            const { id } = req.params
+
+            const student = await Student.find(id)
 
             student.birth_date = date(student.birth_date).iso //AAAA-MM-DD
 
-            Student.selectTeacherOptions(function (options) {
+            const teacherOptions = await Student.selectTeacherOptions()
 
-                return res.render('students/edit', { teacherOptions: options, student })
+            return res.render('students/edit', { teacherOptions, student })
+
+        } catch (error) {
+            console.error(error)
+            return res.render('students/edit', {
+                error: 'Não foi possível completar seu pedido, recarregue a página e tente novamente.'
             })
-        })
-    },
-    put(req, res) {
-        const keys = Object.keys(req.body)
-
-
-        for (let key of keys) {
-            if (req.body[key] == "")
-                return res.send('Please fill in all fields.')
-
         }
-
-        Student.update(req.body, function () {
-            return res.redirect(`/students/${req.body.id}`)
-        })
     },
-    delete(req, res) {
-        Student.delete(req.body.id, function () {
-            return res.redirect('/students/')
-        })
-    }
+    async put(req, res) {
+        try {
+            const keys = Object.keys(req.body)
 
+            for (let key of keys) {
+                if (req.body[key] == "")
+                    return res.render('students/create', {
+                        student: req.body,
+                        teacherOptions: await Student.selectTeacherOptions(),
+                        error: 'Preencha todos os campos'
+                    })
+            }
+
+            const {
+                name,
+                email,
+                avatar_url,
+                birth_date,
+                school_level,
+                workload,
+                teacher_id,
+                id
+            } = req.body
+
+            await Student.update(id, {
+                name,
+                email,
+                avatar_url,
+                birth_date,
+                school_level,
+                workload,
+                teacher_id
+            })
+
+            return res.render(`students/edit`, {
+                student: req.body,
+                teacherOptions: await Student.selectTeacherOptions(),
+                success: 'Aluno atualizado!'
+            })
+        } catch (error) {
+            console.error(error)
+            return res.render('students/edit', {
+                error: 'Não foi possível completar seu pedido, recarregue a página e tente novamente.'
+            })
+        }
+    },
+    async delete(req, res) {
+        try {
+            await Student.delete(req.body.id)
+
+            return res.redirect('/students')
+        } catch (error) {
+            console.error(error)
+
+            return res.render('students/edit', {
+                error: 'Não foi possível completar seu pedido, recarregue a página e tente novamente.'
+            })
+        }
+    }
 }
