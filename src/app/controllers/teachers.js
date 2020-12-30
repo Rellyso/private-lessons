@@ -68,8 +68,6 @@ module.exports = {
 
         let teacher = await Teacher.find(id)
 
-        console.log(teacher)
-
         if (!teacher) return res.render('teachers/show', {
             error: 'Teacher não encontrado'
         })
@@ -147,5 +145,4 @@ module.exports = {
         }
 
     }
-
 }
