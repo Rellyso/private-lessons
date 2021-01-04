@@ -129,6 +129,10 @@
 
 /* ====== FORM ======= */
 
+.item .input {
+    position: relative;
+}
+
 input, select, option:hover {
     font-size: 18px;
     font-weight: bold;
@@ -186,7 +190,7 @@ form {
 }
 
 #form-delete button{
-    background-color: crimson;
+    background-color: #e64c3c;
 
     width: 36%;
 }
@@ -357,4 +361,28 @@ table td a,
 
 .pagination span {
     color: #777;
+}
+
+.input .error {
+    background-color: #e64c3c;
+    padding: 4px;
+    border-radius: 4px;
+    color: white;
+}
+
+input.invalid {
+    border-bottom: 2px solid #e64c3c;
+}
+
+input.invalid::before {
+    content: '';
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    height: 10px;
+    width: 10px;
+
+    color: #e64c3c;
 }
