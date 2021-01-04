@@ -1,41 +1,50 @@
 <div class="item">
                 <div>Avatar URL</div>
-                <input 
-                type="url"
-                name="avatar_url"
-                placeholder="https://"
-                value = "{{ student.avatar_url }}"
-                >
+                <div class="input">
+                    <input 
+                    type="url"
+                    name="avatar_url"
+                    placeholder="https://"
+                    value = "{{ student.avatar_url }}"
+                    >
+                </div>
             </div>
 
             <div class="item">
                 <div>Nome Completo:</div>
-                <input 
-                type="text"
-                name="name"
-                required
-                value="{{ student.name }}"
-                >
+                    <div class="input">
+                    <input 
+                    type="text"
+                    name="name"
+                    required
+                    value="{{ student.name }}"
+                    >
+                </div>
             </div>
 
             <div class="item">
                 <div>Email:</div>
-                <input 
-                type="email"
-                name="email"
-                required
-                value="{{ student.email }}"
-                >
+                    <div class="input">
+                    <input 
+                    type="email"
+                    name="email"
+                    required
+                    value="{{ student.email }}"
+                    onblur="Validate.apply(this, 'isEmail')"
+                    >
+                </div>
             </div>
 
             <div class="item">
                 <div>Data de Nascimento:</div>
-                <input 
-                type="date" 
-                name="birth_date"
-                required
-                value="{{ student.birth_date }}"
-                >
+                    <div class="input">
+                    <input 
+                    type="date" 
+                    name="birth_date"
+                    required
+                    value="{{ student.birth_date }}"
+                    >
+                </div>
             </div>
 
             <div class="item">
