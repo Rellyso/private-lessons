@@ -1,11 +1,12 @@
-const currentPage = location.pathname
-const headerItems = document.querySelectorAll('header .links a')
+const pagination = document.querySelector('.pagination')
 
+const filter = +pagination.dataset.filter
+const total = +pagination.dataset.total
+const selectedPage = +pagination.dataset.page
+const pages = paginate(selectedPage, total)
 
-for (let item of headerItems) {
-    if (currentPage.includes(item.getAttribute('href'))) {
-        item.classList.add('active')
-    }
+if (pagination) {
+    createPagination(pages, selectedPage)
 }
 
 function paginate(selectedPage, totalPages) {
@@ -44,8 +45,8 @@ function createPagination(pages, selectedPage) {
     let isSelectedClass = ''
 
     for (let page of pages) {
-        page == selectedPage 
-            ? isSelectedClass = 'selected' 
+        page == selectedPage
+            ? isSelectedClass = 'selected'
             : isSelectedClass = ''
 
         if (String(page).includes('...')) {
@@ -59,18 +60,6 @@ function createPagination(pages, selectedPage) {
         }
     }
     pagination.innerHTML = elements
-}
-
-const pagination = document.querySelector('.pagination')
-
-
-const filter = +pagination.dataset.filter
-const total = +pagination.dataset.total
-const selectedPage = +pagination.dataset.page
-const pages = paginate(selectedPage, total)
-
-if (pagination) {
-    createPagination(pages, selectedPage)
 }
 
 
