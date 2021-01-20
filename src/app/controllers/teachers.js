@@ -5,30 +5,37 @@ const { age, graduation, classType, date } = require('../../lib/utils')
 module.exports = {
     async index(req, res) {
 
-        let { filter, page, limit } = req.query
+        try {
+            let { filter, page, limit } = req.query
 
-        limit = limit || 2
-        page = page || 1
+            limit = limit || 2
+            page = page || 1
 
-        const offset = limit * (page - 1)
+            const offset = limit * (page - 1)
 
-        const teachers = await Teacher.paginate({
-            filter,
-            page,
-            limit,
-            offset
-        })
+            const teachers = await Teacher.paginate({
+                filter,
+                page,
+                limit,
+                offset
+            })
 
-        teachers.map(teacher => {
-            teacher.subjects_taught = teacher.subjects_taught.split(',')
-        })
+            teachers.map(teacher => {
+                teacher.subjects_taught = teacher.subjects_taught.split(',')
+            })
 
-        const pagination = {
-            total: Math.ceil(teachers[0].total / limit),
-            page
+            const pagination = {
+                total: Math.ceil(teachers[0].total / limit) || 0,
+                page
+            }
+
+            return res.render('teachers/index', { teachers, filter, pagination })
+        } catch (error) {
+            return res.render('teachers/index', { 
+                error: 'Erro ao carregar os professores, por favor entre em contato conosco'
+             })
         }
 
-        return res.render('teachers/index', { teachers, filter, pagination })
 
     },
     create(req, res) {
