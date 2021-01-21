@@ -57,6 +57,7 @@ module.exports = {
             birth_date,
             education_level,
             class_type,
+            avatar_url,
             subjects_taught
         } = req.body
 
@@ -65,10 +66,14 @@ module.exports = {
             birth_date,
             education_level,
             class_type,
+            avatar_url,
             subjects_taught
         })
 
-        return res.redirect(`/teachers/${teacherId}`)
+        return res.render('parts/registers/success', {
+            text: 'Teacher cadastrado com sucesso', // mensagem de sucesso com animação. Não colocar ponto final na mensagem
+            redirectTo: teacherId,
+        })
     },
     async show(req, res) {
         const { id } = req.params
@@ -115,6 +120,7 @@ module.exports = {
                 education_level,
                 class_type,
                 subjects_taught,
+                avatar_url,
                 id
             } = req.body
 
@@ -123,13 +129,15 @@ module.exports = {
                 birth_date,
                 education_level,
                 class_type,
+                avatar_url,
                 subjects_taught,
             })
 
-            return res.render(`teachers/edit`, {
-                teacher: req.body,
-                success: 'Professor atualizado!'
+            return res.render('parts/registers/success', {
+                text: 'Teacher atualizado', // mensagem de sucesso com animação. Não colocar ponto final na mensagem
+                redirectTo: id,
             })
+
         } catch (error) {
             console.error(error)
             return res.render('teachers/edit', {
@@ -142,12 +150,16 @@ module.exports = {
         try {
             await Teacher.delete(req.body.id)
 
-            return res.redirect('/')
+            return res.render('parts/registers/removed', {
+                text: 'Teacher removido', // mensagem de sucesso com animação. Não colocar ponto final na mensagem
+                redirectTo: '/'
+            })
         } catch (error) {
             console.error(error)
 
-            return res.render('students/edit', {
-                error: 'Não foi possível completar seu pedido, recarregue a página e tente novamente.'
+            return res.render('teachers/edit', {
+                error: 'Não foi possível completar seu pedido, recarregue a página e tente novamente.',
+                teacher: req.body
             })
         }
 

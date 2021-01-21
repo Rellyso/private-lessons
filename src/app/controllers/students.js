@@ -76,7 +76,10 @@ module.exports = {
                 teacher_id
             })
 
-            return res.redirect(`/students/${studentId}`)
+            return res.render('parts/registers/success', {
+                text: 'Student cadastrado com sucesso', // mensagem de sucesso com animação. Não colocar ponto final na mensagem
+                redirectTo: studentId,
+            })
 
         } catch (error) {
             console.error(error)
@@ -151,11 +154,11 @@ module.exports = {
                 teacher_id
             })
 
-            return res.render(`students/edit`, {
-                student: req.body,
-                teacherOptions: await Student.selectTeacherOptions(),
-                success: 'Aluno atualizado!'
+            return res.render('parts/registers/success', {
+                text: 'Student atualizado', // mensagem de sucesso com animação. Não colocar ponto final na mensagem
+                redirectTo: id,
             })
+
         } catch (error) {
             console.error(error)
             return res.render('students/edit', {
@@ -167,7 +170,11 @@ module.exports = {
         try {
             await Student.delete(req.body.id)
 
-            return res.redirect('/students')
+            return res.render('parts/registers/removed', {
+                text: 'Student removido', // mensagem de sucesso com animação. Não colocar ponto final na mensagem
+                redirectTo: '/students'
+            })
+            
         } catch (error) {
             console.error(error)
 
