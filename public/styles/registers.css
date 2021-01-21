@@ -1,0 +1,38 @@
+.card.register {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+}
+
+.card.register .success-lottie {
+    height: 120px;
+    margin: 0 auto;
+}
+
+.card.register .removed-lottie {
+    height: 120px;
+    margin: 0 auto;
+}
+
+.card.register h2 {
+    font-size: 24px;
+    line-height: 28px;
+    color: #777;
+    
+    margin: 0 auto;
+}
+
+.card.register p {
+    font-size: 14px;
+    color: #999;
+
+    margin-top: 20px;
+}
+
+.card.register p a {
+    font-size: 14px;
+    color: var(--primary-color);
+}
