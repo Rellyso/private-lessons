@@ -56,3 +56,18 @@ const Validate = {
         }
     }
 }
+
+function redirectTo(where) {
+    setTimeout(() => {
+        const currentLocal = window.location.pathname.replace(/(\w)(^"\?_")/, "$1")
+        
+
+        window.location.href = `${currentLocal}/${where}`
+    }, 3000)
+}
+
+function exactRedirectTo(where) {
+    setTimeout(() => {
+        window.location.href = `${where}`
+    }, 5000)
+}
