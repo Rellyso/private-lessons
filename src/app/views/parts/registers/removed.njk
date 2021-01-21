@@ -1,0 +1,37 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>{{ text }}</title>
+{% endblock head %}
+
+{% block content %}
+
+    <div class="card register">
+        <div class="removed-lottie"></div>
+        <h2>{{ text }}.</h2>
+        <p>você será redirecionado para a <a href="/">página inicial</a></p>
+    </section>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="/scripts/lottie.min.js"></script>
+<script>
+    const element = document.querySelector('.removed-lottie')
+
+    lottie
+        .loadAnimation({
+            container: element, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: '/8366-add-and-remove.json' // the path to the animation json
+        })
+        .setSpeed(1)
+
+    document
+        .querySelector('body')
+        .addEventListener('load', exactRedirectTo("{{redirectTo}}"))
+</script>
+{% endblock scripts %}

@@ -1,16 +1,14 @@
 {% extends "layout.njk" %}
 
 {% block head %}
-    <title>{{ student.name }}
-        - Private lessons</title>
+    <title>{{ text }}</title>
 {% endblock head %}
 
 {% block content %}
 
-    <div class="card">
-        <div class="success-lottie">
-            <h2>Sucess</h2>
-        </div>
+    <div class="card register">
+        <div class="success-lottie"></div>
+        <h2>{{ text }}.</h2>
     </section>
 </div>
 {% endblock content %}
@@ -23,9 +21,13 @@
     lottie.loadAnimation({
         container: element, // the dom element that will contain the animation
         renderer: 'svg',
-        loop: true,
+        loop: false,
         autoplay: true,
-        path: '/6147-success-badge-animation' // the path to the animation json
-    });
+        path: '/4431-success.json' // the path to the animation json
+    })
+    .setSpeed(1)
+
+
+    document.querySelector('body').addEventListener('load', redirectTo({{redirectTo}}))
 </script>
 {% endblock scripts %}
