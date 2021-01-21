@@ -1,46 +1,47 @@
 {% extends "layout.njk" %}
 
 {% block head %}
-    <title>{{ student.name }} - Private lessons</title>
+    <title>{{ student.name }}
+        - Private lessons</title>
 {% endblock head %}
 
 {% block content %}
-    <div class="card">
-        <section 
-        class="avatar"
-        style="background: url({{ student.avatar_url }}) no-repeat center center / cover"></section>
 
+    <div class="card">
+        <section class="avatar" style="background: url({{ student.avatar_url }}) no-repeat center center / cover"></section>
+        
         <section class="details">
-            
+
             <h3>detalhes</h3>
 
             <div class="item">
-                <div>Nome Completo</div> 
+                <div>Nome Completo</div>
                 <div>{{ student.name }}</div>
             </div>
 
             <div class="item">
-                <div>Email</div> 
+                <div>Email</div>
                 <div>{{ student.email }}</div>
             </div>
 
             <div class="item">
-                <div>Aniversário</div> 
+                <div>Aniversário</div>
                 <div>{{ student.birth_date }}</div>
             </div>
 
             <div class="item">
-                <div>Ano Escolar</div> 
+                <div>Ano Escolar</div>
                 <div>{{ student.school_level }}</div>
             </div>
 
             <div class="item">
-                <div>Carga Horária (por semana)</div> 
-                <div>{{ student.workload }} horas</div>
+                <div>Carga Horária (por semana)</div>
+                <div>{{ student.workload }}
+                    horas</div>
             </div>
 
             <div class="item">
-                <div>Aluno de</div> 
+                <div>Aluno de</div>
                 <div>{{ student.teacher_name }}</div>
             </div>
 
